@@ -11,7 +11,7 @@ public class NoticeVO{
 	private Date notice_regdate;
 	private int notice_viewcnt;
 	private int notice_replycnt;
-	
+	  
 	private String files;
 	
 	public NoticeVO() {
