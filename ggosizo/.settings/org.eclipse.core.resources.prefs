@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/ggosizo/controller/jm/QnaController.java=UTF-8
+encoding//src/main/java/com/ggosizo/persistence/jm/QnaReplyDAO.java=UTF-8
+encoding//src/main/java/com/ggosizo/persistence/jm/QnaReplyDAOImpl.java=UTF-8
+encoding//src/main/java/com/ggosizo/service/jm/QnaReplyServiceImpl.java=UTF-8

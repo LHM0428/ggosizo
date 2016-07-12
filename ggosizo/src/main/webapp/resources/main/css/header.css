@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+#logMenu {
+	text-align: right;
+	font-size: 15px;
+	margin-right: 200px;
+	margin-top: 30px;
+}
+#mainBg{
+	background-color: white;
+} 
+.user_info_edit {
+  width: auto;
+  background-color: orange;
+  color: white;
+  padding: 10px 5px;
+  margin: auto;
+  border: none;
+  border-radius: 10px;
+  cursor: auto;
+}
+.user_logout{
+  width: auto;
+  background-color: orange;
+  color: white;
+  padding: 10px 5px;
+  margin: auto;
+  border: none;
+  border-radius: 10px;
+  cursor: auto;
+}
+.user_mypage{
+  width: auto;
+  background-color: orange;
+  color: white;
+  padding: 10px 5px;
+  margin: auto;
+  border: none;
+  border-radius: 10px;
+  cursor: auto;
+}

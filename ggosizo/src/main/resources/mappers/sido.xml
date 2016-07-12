@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sido">
+   <select id="selectSido" resultType="String">
+      select distinct ds_sido from ds_zip
+      order by ds_sido
+   </select>
+   <select id="selectGugun" resultType="String" parameterType="String">
+      select distinct ds_gugun  
+      from ds_zip
+      where ds_sido=#{sido}
+      order by ds_gugun
+   </select>
+   <select id="selectDong" resultType="String" parameterType="String">
+      select distinct ds_dong  from ds_zip
+      where ds_gugun=#{gugun}
+      order by ds_dong
+   </select>
+</mapper>
+ 

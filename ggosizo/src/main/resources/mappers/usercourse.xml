@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userCourse">
+   <!-- 코스별로 insert,update-->
+   <sql id="selectCourse1">
+      <if test="category != null">
+         <choose>
+            <when test="category=='도서관'">
+               library
+            </when>
+            <when test="category=='미술관'">
+               gallery
+            </when>
+            <when test="category=='박물관'">
+               museum
+            </when>
+            <when test="category=='카페'">
+               cafe
+            </when>
+            <when test="category=='콘서트'">
+               concert
+            </when>
+            <when test="category=='맛집'">
+               restaurant
+            </when>
+            <when test="category=='축제'">
+               festival
+            </when>
+            <when test="category=='공원'">
+               park
+            </when>
+            <when test="category=='기타'">
+               etc_course
+            </when>
+         </choose>      
+      </if>
+   </sql>
+   <sql id="selectCourse2">
+      <if test="category2 != null">
+         <choose>
+            <when test="category2=='도서관'">
+               library
+            </when>
+            <when test="category2=='미술관'">
+               gallery
+            </when>
+            <when test="category2=='박물관'">
+               museum
+            </when>
+            <when test="category2=='카페'">
+               cafe
+            </when>
+            <when test="category2=='콘서트'">
+               concert
+            </when>
+            <when test="category2=='맛집'">
+               restaurant
+            </when>
+            <when test="category2=='축제'">
+               festival
+            </when>
+            <when test="category2=='공원'">
+               park
+            </when>
+            <when test="category2=='기타'">
+               etc_course
+            </when>
+         </choose>      
+      </if>
+   </sql>
+   <sql id="selectCourse3">
+      <if test="category3 != null">
+         <choose>
+            <when test="category3=='도서관'">
+               library
+            </when>
+            <when test="category3=='미술관'">
+               gallery
+            </when>
+            <when test="category3=='박물관'">
+               museum
+            </when>
+            <when test="category3=='카페'">
+               cafe
+            </when>
+            <when test="category3=='콘서트'">
+               concert
+            </when>
+            <when test="category3=='맛집'">
+               restaurant
+            </when>
+            <when test="category3=='축제'">
+               festival
+            </when>
+            <when test="category3=='공원'">
+               park
+            </when>
+            <when test="category3=='기타'">
+               etc_course
+            </when>
+         </choose>      
+      </if>
+   </sql>
+   
+   <!-- insert시에 시퀀스 사용 -->
+   <sql id="selectCourseNo1">
+      <if test="category != null">
+         <choose>
+            <when test="category=='도서관'">
+               library_seq.nextval
+            </when>
+            <when test="category=='미술관'">
+               gallery_seq.nextval
+            </when>
+            <when test="category=='박물관'">
+               museum_seq.nextval
+            </when>
+            <when test="category=='카페'">
+               cafe_seq.nextval
+            </when>
+            <when test="category=='콘서트'">
+               concert_seq.nextval
+            </when>
+            <when test="category=='맛집'">
+               restaurant_seq.nextval
+            </when>
+            <when test="category=='축제'">
+               festival_seq.nextval
+            </when>
+            <when test="category=='공원'">
+               park_seq.nextval
+            </when>
+            <when test="category=='기타'">
+               etc_course_seq.nextval
+            </when>
+         </choose>      
+      </if>
+   </sql>
+   <sql id="selectCourseNo2">
+      <if test="category2 != null">
+         <choose>
+            <when test="category2=='도서관'">
+               library_seq.nextval
+            </when>
+            <when test="category2=='미술관'">
+               gallery_seq.nextval
+            </when>
+            <when test="category2=='박물관'">
+               museum_seq.nextval
+            </when>
+            <when test="category2=='카페'">
+               cafe_seq.nextval
+            </when>
+            <when test="category2=='콘서트'">
+               concert_seq.nextval
+            </when>
+            <when test="category2=='맛집'">
+               restaurant_seq.nextval
+            </when>
+            <when test="category2=='축제'">
+               festival_seq.nextval
+            </when>
+            <when test="category2=='공원'">
+               park_seq.nextval
+            </when>
+            <when test="category2=='기타'">
+               etc_course_seq.nextval
+            </when>
+         </choose>      
+      </if>
+   </sql>
+   <sql id="selectCourseNo3">
+      <if test="category3 != null">
+         <choose>
+            <when test="category3=='도서관'">
+               library_seq.nextval
+            </when>
+            <when test="category3=='미술관'">
+               gallery_seq.nextval
+            </when>
+            <when test="category3=='박물관'">
+               museum_seq.nextval
+            </when>
+            <when test="category3=='카페'">
+               cafe_seq.nextval
+            </when>
+            <when test="category3=='콘서트'">
+               concert_seq.nextval
+            </when>
+            <when test="category3=='맛집'">
+               restaurant_seq.nextval
+            </when>
+            <when test="category3=='축제'">
+               festival_seq.nextval
+            </when>
+            <when test="category3=='공원'">
+               park_seq.nextval
+            </when>
+            <when test="category3=='기타'">
+               etc_course_seq.nextval
+            </when>
+         </choose>      
+      </if>
+   </sql>
+   
+   <!-- 코스별로 총갯수 확인 -->
+   <sql id="selectCourseAllNo">
+      <if test="course!=null">
+         <choose>
+            <when test="course=='도서관'">
+               'LIBRARY_SEQ'
+            </when>
+            <when test="course=='미술관'">
+               'GALLERY_SEQ'
+            </when>
+            <when test="course=='박물관'">
+               'MUSEUM_SEQ'
+            </when>
+            <when test="course=='카페'">
+               'CAFE_SEQ'
+            </when>
+            <when test="course=='콘서트'">
+               'CONCERT_SEQ'
+            </when>
+            <when test="course=='맛집'">
+               'RESTAURANT_SEQ'
+            </when>
+            <when test="course=='축제'">
+               'FESTIVAL_SEQ'
+            </when>
+            <when test="course=='공원'">
+               'PARK_SEQ'
+            </when>
+            <otherwise>
+               'ETC_COURSE_SEQ'
+            </otherwise>
+         </choose>
+      </if>
+   </sql>
+   
+   <!-- date_course에 insert -->
+   <sql id="selectDateCourse1">
+      <if test="course1!=null">
+         <choose>
+            <when test="course1=='도서관'">
+               course_li
+            </when>
+            <when test="course1=='미술관'">
+               course_ga
+            </when>
+            <when test="course1=='박물관'">
+               course_mu
+            </when>
+            <when test="course1=='카페'">
+               course_ca
+            </when>
+            <when test="course1=='콘서트'">
+               course_con
+            </when>
+            <when test="course1=='맛집'">
+               course_re
+            </when>
+            <when test="course1=='축제'">
+               course_f
+            </when>
+            <when test="course1=='공원'">
+               course_p
+            </when>
+            <otherwise>
+               course_etc1
+            </otherwise>
+         </choose>
+      </if>
+   </sql>
+   <sql id="selectDateCourse2">
+      <if test="course2!=null">
+         <choose>
+            <when test="course2=='도서관'">
+               course_li
+            </when>
+            <when test="course2=='미술관'">
+               course_ga
+            </when>
+            <when test="course2=='박물관'">
+               course_mu
+            </when>
+            <when test="course2=='카페'">
+               course_ca
+            </when>
+            <when test="course2=='콘서트'">
+               course_con
+            </when>
+            <when test="course2=='맛집'">
+               course_re
+            </when>
+            <when test="course2=='축제'">
+               course_f
+            </when>
+            <when test="course2=='공원'">
+               course_p
+            </when>
+            <otherwise>
+               course_etc2
+            </otherwise>
+         </choose>
+      </if>
+   </sql>
+   <sql id="selectDateCourse3">
+      <if test="course3!=null">
+         <choose>
+            <when test="course3=='도서관'">
+               course_li
+            </when>
+            <when test="course3=='미술관'">
+               course_ga
+            </when>
+            <when test="course3=='박물관'">
+               course_mu
+            </when>
+            <when test="course3=='카페'">
+               course_ca
+            </when>
+            <when test="course3=='콘서트'">
+               course_con
+            </when>
+            <when test="course3=='맛집'">
+               course_re
+            </when>
+            <when test="course3=='축제'">
+               course_f
+            </when>
+            <when test="course3=='공원'">
+               course_p
+            </when>
+            <otherwise>
+               course_etc3
+            </otherwise>
+         </choose>
+      </if>
+   </sql>
+   
+   <!-- 각각의 코스번호 select -->
+   <sql id="selectCourseNo"> 
+         <if test="name != null and order==1">
+         <choose>
+            <when test="name=='도서관'">
+               course_li
+            </when>
+            <when test="name=='미술관'">
+               course_ga
+            </when>
+            <when test="name=='박물관'">
+               course_mu
+            </when>
+            <when test="name=='카페'">
+               course_ca
+            </when>
+            <when test="name=='콘서트'">
+               course_con
+            </when>
+            <when test="name=='맛집'">
+               course_re
+            </when>
+            <when test="name=='축제'">
+               course_f
+            </when>
+            <when test="name=='공원'">
+               course_p
+            </when>
+            <otherwise>
+               course_etc1
+            </otherwise>
+         </choose>
+         </if>
+         <if test="name != null and order==2">
+         <choose>
+            <when test="name=='도서관'">
+               course_li
+            </when>
+            <when test="name=='미술관'">
+               course_ga
+            </when>
+            <when test="name=='박물관'">
+               course_mu
+            </when>
+            <when test="name=='카페'">
+               course_ca
+            </when>
+            <when test="name=='콘서트'">
+               course_con
+            </when>
+            <when test="name=='맛집'">
+               course_re
+            </when>
+            <when test="name=='축제'">
+               course_f
+            </when>
+            <when test="name=='공원'">
+               course_p
+            </when>
+            <otherwise>
+               course_etc2
+            </otherwise>
+         </choose>
+         </if>      
+         <if test="name != null and order==3">
+         <choose>
+            <when test="name=='도서관'">
+               course_li
+            </when>
+            <when test="name=='미술관'">
+               course_ga
+            </when>
+            <when test="name=='박물관'">
+               course_mu
+            </when>
+            <when test="name=='카페'">
+               course_ca
+            </when>
+            <when test="name=='콘서트'">
+               course_con
+            </when>
+            <when test="name=='맛집'">
+               course_re
+            </when>
+            <when test="name=='축제'">
+               course_f
+            </when>
+            <when test="name=='공원'">
+               course_p
+            </when>
+            <otherwise>
+               course_etc3
+            </otherwise>
+         </choose>      
+         </if> 
+      </sql>
+      
+      <!-- 각각의 코스 select -->   
+      <sql id="selectCourse"> 
+      <if test="name != null">
+         <choose>
+            <when test="name=='도서관'">
+               library
+            </when>
+            <when test="name=='미술관'">
+               gallery
+            </when>
+            <when test="name=='박물관'">
+               museum
+            </when>
+            <when test="name=='카페'">
+               cafe
+            </when>
+            <when test="name=='콘서트'">
+               concert
+            </when>
+            <when test="name=='맛집'">
+               restaurant
+            </when>
+            <when test="name=='축제'">
+               festival
+            </when>
+            <when test="name=='공원'">
+               park
+            </when>
+            <otherwise>
+               etc_course
+            </otherwise>
+         </choose>      
+      </if>
+      </sql>
+   
+   <!-- 각각의 코스 insert -->
+   <insert id="insertCourse1">
+      insert into <include refid="selectCourse1"></include>
+      (no,name,si,gugun,dong,coming,tel,url,openhour,closeday,
+      startdate,enddate,category,price,content,writer) 
+      values
+      (<include refid="selectCourseNo1"></include>,#{name},#{si},#{gugun},#{dong},#{coming},#{tel},#{url},
+      #{openhour},#{closeday},#{startdate},#{enddate},#{category},#{price},#{content},#{writer})
+   </insert>
+   <insert id="insertCourse2">
+      insert into <include refid="selectCourse2"></include>
+      (no,name,si,gugun,dong,coming,tel,url,openhour,closeday,
+      startdate,enddate,category,price,content,writer) 
+      values
+      (<include refid="selectCourseNo2"></include>,#{name2},#{si2},#{gugun2},#{dong2},#{coming2},#{tel2},#{url2},
+      #{openhour2},#{closeday2},#{startdate2},#{enddate2},#{category2},#{price2},#{content2},#{writer2})
+   </insert>   
+   <insert id="insertCourse3">
+      insert into <include refid="selectCourse3"></include>
+      (no,name,si,gugun,dong,coming,tel,url,openhour,closeday,
+      startdate,enddate,category,price,content,writer) 
+      values
+      (<include refid="selectCourseNo3"></include>,#{name3},#{si3},#{gugun3},#{dong3},#{coming3},#{tel3},#{url3},
+      #{openhour3},#{closeday3},#{startdate3},#{enddate3},#{category3},#{price3},#{content3},#{writer3})
+   </insert>
+   
+   <!-- 각각의 코스 갯수 select -->
+   <select id="selectCourseAllNo" resultType="int">
+      select last_number from user_sequences 
+      where sequence_name=<include refid="selectCourseAllNo"></include>
+   </select>
+   
+   <!-- 데이트코스 insert -->
+   <insert id="insertDateCourse">
+      insert into date_course 
+      (course_no,
+      course_title,
+      <include refid="selectDateCourse1"></include>,
+      <include refid="selectDateCourse2"></include>,
+      <include refid="selectDateCourse3"></include>,
+      course_order,
+      course_writer)
+      values
+      (date_course_seq.nextval,#{title},#{courseNo1},#{courseNo2},#{courseNo3},#{order},#{course_writer})
+   </insert>
+   
+   <!-- 데이트코스 select -->
+   <select id="selectDateCourse" resultType="com.ggosizo.domain.ss.DateCourseDTO">
+      select*from
+      date_course
+      where course_no=#{no}
+   </select>
+   
+   <!-- 데이트코스 전체 select -->
+   <select id="selectDateCourseAll" resultType="com.ggosizo.domain.ss.DateCourseDTO">
+      select*from
+      date_course
+   </select>
+   
+   <!-- 각각의 코스번호 select -->
+   <select id="selectCourseNo" resultType="int">
+      select 
+      <include refid="selectCourseNo"></include>
+      from date_course
+      where course_no=#{no}
+   </select>
+   
+   <!-- 각각의 코스 select -->   
+   <select id="selectCourse" resultType="com.ggosizo.domain.DateCourse">
+      select no,name,addr,si,gugun,dong,coming,tel,url,img,openhour,closeday,startdate,
+      enddate,category,price,content,writer,viewcnt,replycnt,regdate
+      from
+      <include refid="selectCourse"></include>
+      where no=#{no}
+   </select>
+   
+   <!-- 데이트코스 delete -->
+   <delete id="deleteDateCourse">
+      delete from date_course
+      where course_no=#{no}
+   </delete>
+   
+   <!-- 각각의 코스 update -->
+   <update id="updateCourse1">
+      update <include refid="selectCourse1"></include> set
+      name=#{name},si=#{si},gugun=#{gugun},dong=#{dong},coming=#{coming},tel=#{tel},
+      url=#{url},openhour=#{openhour},closeday=#{closeday},
+      startdate=#{startdate},enddate=#{enddate},
+      category=#{category},price=#{price},content=#{content}
+      where no=#{no}
+   </update>
+   <update id="updateCourse2">
+      update <include refid="selectCourse2"></include> set
+      name=#{name2},si=#{si2},gugun=#{gugun2},dong=#{dong2},coming=#{coming2},tel=#{tel2},
+      url=#{url2},openhour=#{openhour2},closeday=#{closeday2},
+      startdate=#{startdate2},enddate=#{enddate2},
+      category=#{category2},price=#{price2},content=#{content2}
+      where no=#{no2}
+   </update>
+   <update id="updateCourse3">
+      update <include refid="selectCourse3"></include> set
+      name=#{name3},si=#{si3},gugun=#{gugun3},dong=#{dong3},coming=#{coming3},tel=#{tel3},
+      url=#{url3},openhour=#{openhour3},closeday=#{closeday3},
+      startdate=#{startdate3},enddate=#{enddate3},
+      category=#{category3},price=#{price3},content=#{content3}
+      where no=#{no3}
+   </update>
+   <update id="updateDateCourse">
+      update date_course set
+      course_title=#{title}
+      where course_no=#{dateCourseNo}
+   </update>
+   <!-- 작성자로 date_course select -->
+   <select id="selectId" resultType="com.ggosizo.domain.ss.DateCourseDTO">
+      select*from date_course
+      where course_writer=#{writer}
+   </select>
+   
+   <select id="selectKeyword" resultType="com.ggosizo.domain.ss.DateCourseDTO">
+      select*from date_course
+      where course_no >0 <include refid="keyword"/>
+      order by course_no desc
+   </select>
+   
+   <sql id="keyword">
+      <if test="keyword != null">
+      and    course_title like '%'||#{keyword}||'%'
+      </if>
+   </sql>
+   
+   <select id="listSearchCount" resultType="int">
+      select count(*) from date_course
+      where course_no >0 <include refid="keyword"/>
+   </select>
+   
+   <update id="viewCntAdd">
+      update date_course set course_viewcnt = course_viewcnt+1
+      where course_no=#{no}
+   </update>
+   
+   <update id="updateReplyCnt">
+         update date_course set course_replycnt = course_replycnt+#{amount}
+     	 where course_no=#{no}
+   </update>
+   <update id="updateLikeCnt">
+         update date_course set course_like = course_like+#{amount}
+     	 where course_no=#{no}
+   </update>
+</mapper>

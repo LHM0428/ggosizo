@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="festival">
+<!-- //no,name,addr,si,gugun,dong,coming,tel,url,img,openhour,closeday,startdate,enddate,category,price,content,viewcnt,replycnt,regdate  -->
+	<insert id="insert">
+		Insert into festival (NO,NAME,SI,GUGUN,DONG,ADDR, content,coming,tel,url, img, openhour, closeday, category,price, startdate, enddate, writer ) 
+		values (festival_seq.nextval,#{name},#{si},#{gugun},#{dong},#{addr},#{content},
+		#{coming}, #{tel}, #{url}, #{img}, #{openhour}, #{closeday}, #{category}, #{price},#{startdate},#{enddate}, #{writer} )
+	</insert>
+	
+	<delete id="delete">
+		delete from festival where no = #{no}
+	</delete> 
+	
+	<update id="update">
+		update festival 
+		set name=#{name},ADDR=#{addr},gugun=#{gugun},dong=#{dong},content=#{content},
+		coming=#{coming}, tel=#{tel}, url=#{url}, img=#{img}, openhour=#{openhour}, closeday=#{closeday},
+		category=#{category}, price=#{price}, startdate=#{startdate}, enddate=#{enddate}, regdate=sysdate
+		where no=#{no}
+	</update>
+	
+	<select id="select" resultType="festival">
+		select * from festival
+		where no=#{no}
+	</select>
+	
+  <select id="selectAll" resultType="festival">
+     select *
+     from festival where no>0 order by no desc
+  </select>
+  
+  <select id="searchAddr" resultType="festival">
+  	select *
+  	from festival
+  	where no>0<include refid="search"/>
+  	order by no desc
+  </select>
+  
+  <select id="searchCount" 
+  		resultType="int">
+  	select count(*)
+  	from festival
+  	where no>0<include refid="search"/>
+  </select>
+  
+  <sql id="search">
+	<if test="gugun!=null">
+  		and gugun=#{gugun} and dong=#{dong}
+  	</if>
+  </sql>
+  
+  <select id="selectInfo"
+  		resultType="festival"
+  		parameterType="Integer">
+  	select *
+  	from festival
+  	where no = #{no}
+  </select>
+	
+	<select id="selectCount" resultType="int">
+		select count(*) cnt from festival
+	</select>
+	
+	<select id="listSearch" resultType="festival">
+		select * from festival
+		where no>0
+      	<include refid="searchKeword"/>
+    	 order by no desc 
+	</select>
+	
+	<select id="listSearchCount" resultType="int">
+      	select count(*) from festival
+    	where no>0
+    	<include refid="searchKeword"/>
+   </select>
+   
+   <sql id="searchKeword">
+       <!-- if(title이 null이 아니면){  -->
+     <if test="searchType != null">
+       <choose>
+         <when test="searchType=='t'.toString()">
+           and name like '%'||#{keyword}||'%'
+         </when>
+       </choose>       
+     </if>
+     <if test="month !=null">
+     	and startdate like '%'||#{month}||'%'
+     </if>
+   </sql>
+   
+   <select id="topFestival" resultType="festival">
+   	select * 
+   	from( select no,name,addr,si,gugun,dong,coming,tel,url,img,openhour,closeday,startdate,enddate,category,price,content,viewcnt,replycnt,regdate,rownum rn
+   		  from festival
+   		  where startdate like #{month})
+    where rn between 1 and 3
+   	order by startdate desc
+   </select>
+   
+	<update id="updateViewCnt">
+   	update festival set viewcnt = viewcnt+1
+   	where no=#{no}
+   </update>	
+   
+   <update id="updateReplyCnt">
+   	update festival set replycnt = replycnt + #{amount}
+   	where no=#{no}
+   </update>   
+   
+	<update id="updateLikeCnt">
+	update festival set likecnt = likecnt +#{amount}
+	where no=#{no}
+	</update>
+   
+   
+</mapper>

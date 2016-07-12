@@ -1,0 +1,139 @@
+@CHARSET "UTF-8";
+
+<style type="text/css">
+#all_wrap {
+	position: relative;
+	float: left;
+	width: 100%;
+	background-color: white;
+	margin: 0 auto;
+	clear: both;
+	height: auto;
+}
+
+#wrap {
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
+	margin-top: 80px;
+}
+
+#top {
+	width: 100%;
+	position: relative;
+	margin: 0 auto;
+}
+
+#logo {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	position: relative;
+	margin: left;
+	width: 100%;
+	text-align: center;
+}
+
+#login_form {
+	width: 20%;
+	position: relative;
+	margin: 0 auto;
+}
+
+.id_text {
+	height: 50px;
+	border: 1px solid #dadada;
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+	margin-bottom: 10px;
+	color: #999999;
+	text-indent: 10px;
+	background-color: #FFF;
+}
+
+.pass_text {
+	height: 50px;
+	border: 1px solid #dadada;
+	width: 100%;
+	margin: 0 auto;
+	position:;
+	margin-bottom: 30px;
+	color: #999999;
+	text-indent: 10px;
+	background-color: #FFF;
+}
+
+.ok_btn {
+	width: 100%;
+	background-color: #4CAF50;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 15px;
+	border: 1px solid #4CAF50;
+	height: 60px;
+	border-radius: 0px;
+}
+
+.keep {
+	margin-top: 10px;
+	color: #333333;
+	height: 24px;
+	margin-bottom: 20px;
+	width: 100%;
+	position: relative;
+}
+
+.keep_img {
+	width: 24px;
+	height: 24px;
+	position: relative;
+	float: left;
+}
+
+.keep_text {
+	width: 150px;
+	height: 20px;
+	padding-top: 4px;
+	position: relative;
+	float: left;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 3px;
+}
+
+#bottom {
+	width: 100%;
+	position: relative;
+	border-top: 1px solid #e4e4e5;
+	padding-top: 20px;
+	text-align: center;
+}
+
+.bot {
+	ist-style: none;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.bot>li {
+	display: inline-block;
+	padding-left: 2px;
+	padding-right: 6px;
+	border-right: 1px solid #e4e4e5;
+}
+
+.bot>li>a {
+	display: block;
+	color: #999999;
+	border: 0;
+	text-decoration: none;
+}
+
+.bot>li>a:hover {
+	text-decoration: underline;
+	color: #999999;
+}
+
+
+
+</style>

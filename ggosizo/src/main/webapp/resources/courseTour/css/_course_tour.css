@@ -1,0 +1,29 @@
+@CHARSET "EUC-KR";
+	.circle_div {
+    background-color: #FFB247;
+    height : 200px;
+    width : 200px;
+    border-radius : 50%;
+    -webkit-border-radius : 50%;
+    -moz-border-radius : 50%;
+    overflow : hidden;
+    vertical-align : middle;
+	}
+	.circle_div_small {
+    height : 50px;
+    width : 50px;
+    border-radius : 50%;
+    -webkit-border-radius : 50%;
+    -moz-border-radius : 50%;
+    overflow : hidden;
+    vertical-align : middle;
+	}
+	.select {
+	position : relative;
+    top:-115px;
+	z-index: 1px;
+	}
+	.list {
+	position : absolute;
+	z-index: 2px;
+	}

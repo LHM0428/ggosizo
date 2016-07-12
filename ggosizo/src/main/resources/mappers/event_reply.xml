@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="event_reply">
+ <!-- no;	reply_no; reply_content; reply_writer; reply_regdate; reply_updatedate; -->
+	<select id="list" resultType="event_reply">
+		select * from event_reply
+		where no = #{no}
+		order by reply_no desc
+	</select>
+	
+	<insert id="create">
+		insert into event_reply (no, reply_no, reply_content, reply_writer)
+		values (#{no}, event_reply_seq.nextval, #{reply_content}, #{reply_writer})
+	</insert>
+	
+	<update id="update">
+		update event_reply set reply_content=#{reply_content}, reply_regdate=sysdate
+		where reply_no=#{reply_no}
+	</update>
+	
+	<delete id="delete">
+		delete event_reply where reply_no=#{reply_no}
+	</delete>
+	
+	<select id="count" resultType="int">
+		select count(reply_no) from event_reply
+		where no=#{no}
+	</select>
+	
+	<select id="getNo" resultType="int">
+		select no from event_reply
+		where reply_no=#{reply_no}
+	</select>
+ 
+</mapper>
+
+
+

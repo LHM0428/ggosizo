@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="event">
+
+	<insert id="insert">
+	insert into event values (event_seq.nextval,#{event_title},#{event_content},#{event_writer},sysdate,0, 0)
+	</insert>
+	
+	<delete id="delete">
+		delete from event where event_no=#{event_no}
+	</delete>
+	
+	<update id="update">
+		update event set event_writer=#{event_writer},event_title=#{event_title},
+		event_content=#{event_content},event_regdate=sysdate
+		where event_no=#{event_no}
+	</update>
+
+	<select id="select" resultType="event">
+		select event_no,event_writer,event_title,event_regdate,event_content, event_replycnt from event
+		where event_no=#{event_no}
+	</select>
+	
+	<select id="selectAll" resultType="event">
+		select * from event order by event_no desc
+	</select>
+	
+	<!-- <select id="selectPage" resultType="event">
+		select event_no,event_writer,event_title,event_regdate,event_content,event_viewcnt
+		from (select event_no,event_writer,event_title,event_regdate,event_content,event_viewcnt,rownum rn 
+		      from (select event_no,event_writer,event_title,event_regdate,event_content,event_viewcnt
+		        	from event order by event_no desc)) 
+		where rn between #{start} and #{end}
+	</select> -->
+	
+	 <select id="selectPage" resultType="event">
+      select event_no,event_writer,event_title,event_regdate,event_content,event_viewcnt,event_replycnt
+      from event
+      order by event_no desc
+   	 </select>
+	
+	<select id="selectCount" resultType="Integer">
+		select count(*) cnt from event
+	</select>
+	
+	 <select id="listSearch" resultType="event">
+      select event_no,event_writer,event_title,event_regdate,event_content,event_viewcnt,event_replycnt
+      from event
+      where event_no>0     
+      <include refid="search"/>
+     order by event_no desc     
+   </select>
+   
+   <select id="listSearchCount" resultType="int">
+      select count(*) from event
+      where event_no>0
+      <include refid="search"/>
+   </select>
+	   
+	<sql id="search">
+       <!-- if(title이 null이 아니면){  -->
+     <if test="searchType != null">
+       <choose>
+         <when test="searchType=='t'.toString()">
+           and event_title like '%'||#{keyword}||'%'
+         </when>
+         <when test="searchType=='c'.toString()">
+           and event_content like '%'||#{keyword}||'%'
+         </when>
+         <when test="searchType=='w'.toString()">
+           and event_writer like '%'||#{keyword}||'%'
+         </when>
+         <when test="searchType=='tc'.toString()">
+           and (event_title like '%'||#{keyword}||'%'
+                or event_content like '%'||#{keyword}||'%')
+         </when>
+         <when test="searchType=='cw'.toString()">
+            and (event_content like '%'||#{keyword}||'%'
+                or event_writer like '%'||#{keyword}||'%')
+         </when>         
+         <when test="searchType=='tcw'.toString()">
+           and (event_title like '%'||#{keyword}||'%'
+                or event_content like '%'||#{keyword}||'%'
+                or event_writer like '%'||#{keyword}||'%')
+         </when>
+       </choose>       
+     </if>
+   </sql>
+   
+   <update id="updateViewCnt">
+   	update event set event_viewcnt = event_viewcnt+1
+   	where event_no=#{event_no}
+   </update>	
+   
+    <update id="updateReplyCnt">
+   	update event set event_replycnt = event_replycnt + #{amount}
+   	where event_no=#{event_no}
+   </update>   
+	   
+   <!-- <select id="testSelect" resultType="event">
+      select event_no,event_writer,event_title,event_regdate,event_content,event_viewcnt,event_replycnt
+      from "event"
+      order by event_no desc
+      select * from 
+       (select event_no,event_writer,event_title,event_regdate,event_content,event_viewcnt,event_replycnt,rownum rn
+         from event
+          order by bno desc)
+      where rn between 1 and 10
+   </select>
+
+   
+   댓글수 수정
+   <update id="updateReplyCnt">
+   	update event set event_replycnt = event_replycnt + #{amount}
+   	where event_no=#{event_no}
+   </update> -->
+</mapper>

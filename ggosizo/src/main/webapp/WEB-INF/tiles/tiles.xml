@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions 
+PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1/EN"
+"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+ 
+<tiles-definitions>
+	<definition name="default" template="/WEB-INF/tiles/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="nav" value="/WEB-INF/views/main/nav.jsp"></put-attribute>
+		<put-attribute name="body"></put-attribute>
+		<put-attribute name="sidebar" value="/WEB-INF/views/main/sidebar.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+<!--
+tiles body 
+ -->	
+ 
+<!--yong main tiles  
+ --> 
+ <definition name="/main/body" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/main/body.jsp"></put-attribute>
+ </definition>
+ 
+  
+ <!-- yong user tiles 
+  -->
+ <definition name="/user/user_insert" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/user/user_insert.jsp"></put-attribute>
+ </definition>
+ <definition name="/user/user_update" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/user/user_update.jsp"></put-attribute>
+ </definition>
+ <definition name="/user/user_delete" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/user/user_delete.jsp"></put-attribute>
+ </definition>
+ <definition name="/user/user_error" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/user/user_error.jsp"></put-attribute>
+ </definition>
+ <definition name="/user/login" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/user/login.jsp"></put-attribute>
+ </definition>
+ <definition name="/user/find_id" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/user/find_id.jsp"></put-attribute>
+ </definition>
+ <definition name="/user/find_pass" extends="default">
+ 	<put-attribute name="body" value="/WEB-INF/views/user/find_pass.jsp"></put-attribute>
+ </definition>
+ 
+ <!-- 
+ 	yj notice tiles
+ -->	
+ 	<definition name="/notice/notice" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/notice/notice.jsp"></put-attribute>
+	</definition>
+	<definition name="/notice/input_form" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/notice/input_form.jsp"></put-attribute>
+ 	</definition>
+ 	<definition name="/notice/read_form" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/notice/read_form.jsp"></put-attribute>
+ 	</definition >
+ 	<definition name="/notice/update_form" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/notice/update_form.jsp"></put-attribute>
+ 	</definition>	
+ 	<definition name="/notice/noticePage" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/notice/noticePage.jsp"></put-attribute>
+ 	</definition>
+
+ <!-- 
+ 	hm cafe tiles
+ -->	
+  	<definition name="/cafe/cafe" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/cafe/cafe.jsp"></put-attribute>
+	</definition>
+  	<definition name="/cafe/cafe_inputForm" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/cafe/cafe_inputForm.jsp"></put-attribute>
+	</definition>
+  	<definition name="/cafe/cafe_modify" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/cafe/cafe_modify.jsp"></put-attribute>
+	</definition>
+ <!-- 
+ 	hm restaurant tiles
+ -->	
+  	<definition name="/restaurant/restaurant" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/restaurant/restaurant.jsp"></put-attribute>
+	</definition>
+  	<definition name="/restaurant/restaurant_inputForm" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/restaurant/restaurant_inputForm.jsp"></put-attribute>
+	</definition>
+  	<definition name="/restaurant/restaurant_modify" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/restaurant/restaurant_modify.jsp"></put-attribute>
+	</definition>
+ <!-- 
+ 	hm mypage tiles
+ -->	
+  	<definition name="/mypage/mypage" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/mypage/mypage.jsp"></put-attribute>
+	</definition>
+ <!-- 
+ 	hm matzip tiles
+ -->	
+  	<definition name="/matzip/matzip" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/matzip/matzip.jsp"></put-attribute>
+	</definition>
+ 	
+ <!--
+ 	ss top10 tiles  
+ -->
+ 	<definition name="/top10/top10" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/top10/top10.jsp"></put-attribute>
+	</definition>
+ 	<definition name="/top10/top10_content" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/top10/top10_content.jsp"></put-attribute>
+	</definition>
+ <!--
+ 	ss userCourse tiles  
+ -->
+ 	<definition name="/userCourse/user_course_listAll" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/userCourse/user_course_listAll.jsp"></put-attribute>
+	</definition>
+ 	<definition name="/userCourse/user_course_read" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/userCourse/user_course_read.jsp"></put-attribute>
+	</definition>
+ 	<definition name="/userCourse/user_course_insert" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/userCourse/user_course_insert.jsp"></put-attribute>
+	</definition>
+ 	<definition name="userCourse/user_course_update" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/userCourse/user_course_update.jsp"></put-attribute>
+	</definition>
+	
+<!--
+ 	yj festival tiles  
+ -->
+ 
+ 	<definition name="/festival/festival" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/festival/festival.jsp"></put-attribute>
+	</definition>
+	<definition name="/festival/f_input_form" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/festival/f_input_form.jsp"></put-attribute>
+	</definition>
+	<definition name="/festival/f_read_form" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/festival/f_read_form.jsp"></put-attribute>
+	</definition>
+	<definition name="/festival/f_update_form" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/festival/f_update_form.jsp"></put-attribute>
+	</definition>
+	
+<!--
+ 	yj event tiles  
+ -->
+	<definition name="/event/event" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/event/event.jsp"></put-attribute>
+	</definition>
+	<definition name="/event/input_form" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/event/input_form.jsp"></put-attribute>
+	</definition>
+	<definition name="/event/read_form" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/event/read_form.jsp"></put-attribute>
+	</definition>
+	<definition name="/event/update_form" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/event/update_form.jsp"></put-attribute>
+	</definition>
+<!-- jm
+	qna tiles  
+	-->
+		<definition name="/qna/qna" extends="default">
+ 		<put-attribute name="body" value="/WEB-INF/views/qna/qna.jsp"></put-attribute>
+	</definition>
+	<definition name="/qna/input_form" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/qna/input_form.jsp"></put-attribute>
+ 	</definition>
+ 	<definition name="/qna/read_form" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/qna/read_form.jsp"></put-attribute>
+ 	</definition >
+ 	<definition name="/qna/update_form" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/qna/update_form.jsp"></put-attribute>
+ 	</definition>	
+ 	<definition name="/qna/qnaPage" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/qna/qnaPage.jsp"></put-attribute>
+ 	</definition>
+ 	<definition name="/qna/company_info" extends="default">	
+ 		<put-attribute name="body" value="/WEB-INF/views/qna/company_info.jsp"></put-attribute>
+ 	</definition>
+ 
+</tiles-definitions>

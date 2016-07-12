@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userCourseReply">
+<!-- no;	reply_no; reply_content; reply_writer; reply_regdate; reply_updatedate; -->
+	<select id="list" resultType="usercourseReply">
+		select * from DATE_COURSE_REPLY
+		where no = #{no}
+		order by reply_no desc
+	</select>
+	
+	<insert id="create">
+		insert into DATE_COURSE_REPLY (no, reply_no, reply_content, reply_writer)
+		values (#{no}, DATE_COURSE_REPLY_seq.nextval, #{reply_content}, #{reply_writer})
+	</insert>
+	
+	<update id="update">
+		update DATE_COURSE_REPLY set reply_content=#{reply_content}, reply_regdate=sysdate
+		where reply_no=#{reply_no}
+	</update>
+	
+	<delete id="delete">
+		delete DATE_COURSE_REPLY where reply_no=#{reply_no}
+	</delete>
+	
+	<select id="count" resultType="int">
+		select count(reply_no) from DATE_COURSE_REPLY
+		where no=#{no}
+	</select>
+	
+	<select id="getNo" resultType="int">
+		select no from DATE_COURSE_REPLY
+		where reply_no=#{reply_no}
+	</select>
+</mapper>

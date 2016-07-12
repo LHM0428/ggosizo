@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="like">
+	<insert id="insertLike" parameterType="like">
+		insert into tbl_like (no, u_id, course) values (#{no}, #{u_id}, #{course})
+	</insert>
+	
+	<select id="checkLike" parameterType="like" resultType="int">
+		select count(*) from tbl_like where no=#{no} and u_id=#{u_id} and course=#{course}
+	</select>
+	
+	<delete id="deleteLike" parameterType="like">
+		delete from tbl_like where no=#{no} and u_id=#{u_id} and course=#{course}
+	</delete>
+	
+	<select id="userLikeList" parameterType="String" resultType="like">
+		select * from tbl_like where u_id=#{u_id}
+	</select>
+</mapper>

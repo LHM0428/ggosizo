@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="restaurant">
+
+	<insert id="insert" parameterType="restaurant">
+		Insert into restaurant (NO,NAME,SI,GUGUN,DONG,ADDR, content,coming,tel,url, img, openhour, closeday, category,price, writer ) 
+		values (restaurant_seq.nextval,#{name},#{si},#{gugun},#{dong},#{addr},#{content},
+		#{coming}, #{tel}, #{url}, #{img}, #{openhour}, #{closeday}, #{category}, #{price}, #{writer})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from restaurant where no = #{no}
+	</delete>
+	
+	<update id="update" parameterType="restaurant">
+		update restaurant
+		set name=#{name}, ADDR=#{addr},gugun=#{gugun},dong=#{dong},content=#{content},
+		coming=#{coming}, tel=#{tel}, url=#{url}, img=#{img}, openhour=#{openhour}, closeday=#{closeday},
+		category=#{category}, price=#{price}, regdate=sysdate
+		where no=#{no}
+	</update>
+	
+  <select id="selectAll" resultType="restaurant">
+     select *
+     from restaurant where no>0 order by no desc
+  </select>
+  
+  <select id="searchAddr" resultType="restaurant">
+  	select *
+  	from restaurant
+  	where  no >0 <include refid="search"/>
+  	order by no desc
+  </select>
+  
+ <select id="searchCount" 
+  		resultType="int">
+  	select count(*)
+  	from restaurant
+  	where no>0 <include refid="search"/>
+  </select>
+  
+  <sql id="search">
+	<if test="criGugun!=null">
+  		and gugun=#{criGugun} and dong=#{criDong}
+  	</if>
+  </sql>
+  
+  <select id="selectRestaurant" resultType="restaurant" parameterType="Integer">
+  	select *
+  	from restaurant
+  	where no = #{no}
+  </select>
+  
+	<select id="selectCount" resultType="int">
+		select count(*) cnt from restaurant
+	</select>
+	
+	<update id="updateReplyCnt">
+		update restaurant set replycnt = replycnt+ #{amount} where no=#{no}
+	</update>
+	<update id="updateLikeCnt">
+		update restaurant set likecnt = likecnt+ #{amount} where no=#{no}
+	</update>
+	
+	<update id="viewCnt">
+		update restaurant set viewcnt = viewcnt+1 where no=#{no}
+	</update>
+	
+	<select id="selectKeyword" resultType="restaurant">
+		select * from restaurant where no >0
+		<include refid="searchKeyword"/> 
+	</select>
+	
+	<select id="selectKeywordCount" resultType="int">
+		select count(*) from restaurant where no >0
+		<include refid="searchKeyword"/>
+	</select>
+	
+	<sql id="searchKeyword">
+		and (name like '%'||#{keyword}||'%' or addr like '%'||#{keyword}||'%')
+	</sql>	
+	
+	<select id="selectId" resultType="com.ggosizo.domain.DateCourse">
+		select * from restaurant where writer=#{u_id}
+	</select>
+<!-- restaurant.xml -->
+</mapper>

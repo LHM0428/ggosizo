@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userinfo">
+	 <select id="selectItem" parameterType="userinfoDTO" resultType="userinfoDTO">
+		select * from user_info where u_id=#{u_id}
+	</select>
+	<select id="selectCount" resultType="int">
+		select count(*) cnt from user_info
+	</select>
+	
+	<select id="selectCheckId" parameterType="String" resultType="int">
+		select count(*) cnt from user_info where u_id=#{u_id}
+	</select>
+	
+	<select id="selectUserCheck" parameterType="userinfoVO" resultType="int">
+		select count(*) cnt from user_info where u_id=#{u_id} and u_pass=#{u_pass}
+	</select>
+	<select id="findId" parameterType="userinfoVO" resultType="String">
+		select u_id from user_info where u_name=#{u_name} and u_email=#{u_email}
+	</select>
+	<select id="selectPage" parameterType="java.util.Map" resultType="userinfoVO">
+		select u_id,u_name,u_gender,u_tel,u_email
+		from (select u_id,u_name,u_gender,u_tel,u_email,rownum rn 
+		      from (select u_id,u_name,u_gender,u_tel,u_email
+		        	from user_info order by u_id desc)) 
+		where rn between #{start} and #{end} order by u_id desc
+	</select>
+	<select id="selectUserIdEmailTel" parameterType="userinfoVO" resultType="userinfoVO">
+		select u_id, u_email, u_pass from user_info "
+			+ "where u_id = #{u_id} and u_email = #{u_email} and u_tel = #{u_tel}
+	</select>
+	
+	<update id="UserLogintimeSet" parameterType="userinfoVO">
+		update user_info set u_logintime=sysdate where u_id=#{u_id}
+	</update>
+<!-- 	
+	u_id varchar2(30) primary key,
+	u_pass varchar2(30),
+	u_name varchar2(20),
+	u_gender varchar2(5),
+	u_birth date,
+	u_addr varchar2(15),
+	u_tel number,
+	u_email varchar2(30),
+	u_logintime date -->
+	
+<select id="insertItem" statementType="CALLABLE" parameterType="userinfoVO">
+    { call user_insert(
+    #{u_id},
+    #{u_pass},
+    #{u_name},
+    #{u_gender},
+    #{u_birth},
+    #{u_addr},
+    #{u_tel},
+    #{u_email}
+    ) 
+    }
+    </select>
+    
+<select id="deleteItem" statementType="CALLABLE"  parameterType="userinfoVO">
+    { call user_delete(#{u_id},#{u_pass}) }
+</select>
+<select id="updateItem" statementType="CALLABLE"  parameterType="userinfoVO">
+    { call user_update(
+    #{u_id},
+    #{u_pass},
+    #{u_name},
+    #{u_gender},
+    #{u_birth},
+    #{u_addr},
+    #{u_tel},
+    #{u_email}
+    ) 
+    }
+    </select> 
+</mapper> 

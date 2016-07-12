@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top10">
+	<!-- top10 제목 select -->
+	<select id="course_title" resultType="String">
+		select*from (select course_title from date_course order by course_like desc) where rownum&lt;11
+	</select>
+	
+	<!-- top10 select -->
+	<select id="top10" resultType="com.ggosizo.domain.ss.DateCourseDTO">
+		select*from 
+		(select course_no,course_title,course_order,course_li,course_ga,
+		course_mu,course_ca,course_con,course_re,course_f,course_p, course_like,
+		course_etc1,course_etc2,course_etc3,course_writer, course_regdate
+		from date_course order by course_like desc) 
+		where rownum&lt;11
+	</select>
+	
+		<!-- 각각의 코스번호 select -->
+	 	<sql id="selectCourseNo"> 
+			<if test="name != null and order==1">
+			<choose>
+				<when test="name=='도서관'">
+					course_li
+				</when>
+				<when test="name=='미술관'">
+					course_ga
+				</when>
+				<when test="name=='박물관'">
+					course_mu
+				</when>
+				<when test="name=='카페'">
+					course_ca
+				</when>
+				<when test="name=='콘서트'">
+					course_con
+				</when>
+				<when test="name=='맛집'">
+					course_re
+				</when>
+				<when test="name=='축제'">
+					course_f
+				</when>
+				<when test="name=='공원'">
+					course_p
+				</when>
+				<otherwise>
+					course_etc1
+				</otherwise>
+			</choose>
+			</if>
+			<if test="name != null and order==2">
+			<choose>
+				<when test="name=='도서관'">
+					course_li
+				</when>
+				<when test="name=='미술관'">
+					course_ga
+				</when>
+				<when test="name=='박물관'">
+					course_mu
+				</when>
+				<when test="name=='카페'">
+					course_ca
+				</when>
+				<when test="name=='콘서트'">
+					course_con
+				</when>
+				<when test="name=='맛집'">
+					course_re
+				</when>
+				<when test="name=='축제'">
+					course_f
+				</when>
+				<when test="name=='공원'">
+					course_p
+				</when>
+				<otherwise>
+					course_etc2
+				</otherwise>
+			</choose>
+			</if>		
+			<if test="name != null and order==3">
+			<choose>
+				<when test="name=='도서관'">
+					course_li
+				</when>
+				<when test="name=='미술관'">
+					course_ga
+				</when>
+				<when test="name=='박물관'">
+					course_mu
+				</when>
+				<when test="name=='카페'">
+					course_ca
+				</when>
+				<when test="name=='콘서트'">
+					course_con
+				</when>
+				<when test="name=='맛집'">
+					course_re
+				</when>
+				<when test="name=='축제'">
+					course_f
+				</when>
+				<when test="name=='공원'">
+					course_p
+				</when>
+				<otherwise>
+					course_etc3
+				</otherwise>
+			</choose>		
+			</if> 
+		</sql> 
+		
+	<!-- 각각의 코스번호 select -->
+	<select id="selectCourseNo" resultType="int">	
+		select
+		<include refid="selectCourseNo"></include>
+		from 
+		(select*from (select course_no,course_li,course_ga,course_mu,course_ca,course_con,
+		course_re,course_f,course_p,course_etc1,course_etc2,course_etc3,course_writer
+		from date_course order by course_like desc) where rownum&lt;11) 
+		where course_no=#{no}
+	</select>
+		
+		<!-- 각각의 코스 select -->	
+		<sql id="selectCourse"> 
+		<if test="name != null">
+			<choose>
+				<when test="name=='도서관'">
+					library
+				</when>
+				<when test="name=='미술관'">
+					gallery
+				</when>
+				<when test="name=='박물관'">
+					museum
+				</when>
+				<when test="name=='카페'">
+					cafe
+				</when>
+				<when test="name=='콘서트'">
+					concert
+				</when>
+				<when test="name=='맛집'">
+					restaurant
+				</when>
+				<when test="name=='축제'">
+					festival
+				</when>
+				<when test="name=='공원'">
+					park
+				</when>
+				<otherwise>
+					etc_course
+				</otherwise>
+			</choose>		
+		</if>
+		</sql>
+	
+	<!-- 각각의 코스 select -->	
+	<select id="selectCourse" resultType="com.ggosizo.domain.DateCourse">
+		select no,name,addr,si,gugun,dong,coming,tel,url,img,openhour,closeday,startdate,
+		enddate,category,price,content,viewcnt,replycnt,regdate,writer
+		from
+		<include refid="selectCourse"></include>
+		where no=#{no}
+	</select>
+</mapper>

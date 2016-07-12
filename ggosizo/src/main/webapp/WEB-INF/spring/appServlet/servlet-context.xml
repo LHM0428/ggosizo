@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's 
+		request-processing infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming 
+		model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by 
+		efficiently serving up static resources in the ${webappRoot}/resources 
+		directory -->
+	<resources mapping="/resources/**"
+		location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers 
+		to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix"
+			value="/WEB-INF/views/" />
+		<beans:property name="suffix"
+			value=".jsp" />
+		<beans:property name="order"
+			value="2"></beans:property>
+	</beans:bean>
+
+	<beans:bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver">
+		<beans:property name="maxUploadSize"
+			value="10485760"></beans:property>
+	</beans:bean>
+
+
+	<!-- 업로드된 파일이 저장되는 경로 -->
+
+	<!-- tiles3 -->
+	<!-- Tiles -->
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" 
+		/> <beans:property name="order" value="1"></beans:property> 
+		</beans:bean> <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> 
+		<beans:property name="definitions"> <beans:list> <beans:value>/WEB-INF/tiles/tiles.xml</beans:value> 
+		</beans:list> </beans:property> <beans:property name="preparerFactoryClass" 
+		value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" 
+		/> </beans:bean>
+
+
+	<context:component-scan
+		base-package="com.ggosizo.spring" />
+	<context:component-scan
+		base-package="com.ggosizo.controller" />
+
+	<!-- <beans:bean id="userinfoInterceptor" class="com.ggosizo.interceptor.yong.UserinfoInterceptor"></beans:bean> 
+		<interceptors> <interceptor> <mapping path="/user/insert"/> 
+		<beans:ref bean="userinfoInterceptor"/> </interceptor> 
+		<interceptor> <mapping path="/user/update"/> <beans:ref 
+		bean="userinfoInterceptor"/> </interceptor> </interceptors> -->
+
+	<beans:bean id="loginInterceptor"
+		class="com.ggosizo.interceptor.yong.UserLoginInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor"
+		class="com.ggosizo.interceptor.yong.AuthInterceptor"></beans:bean>
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/loginPOST" />
+			<beans:ref bean="loginInterceptor"></beans:ref>
+		</interceptor>
+		<interceptor>
+			<mapping path="/user/update" />
+			<mapping path="/user/delete" />
+			<mapping path="/mypage" />
+			<mapping path="/festival/input_form" /> <!-- 연지 나중에 수정 -->
+			<mapping path="/userCourse/insert" />
+			<mapping path="/cafe/inputForm" />
+			<mapping path="/restaurant/inputForm" />
+			<mapping path="/qna/input_form" />
+			<beans:ref bean="authInterceptor"></beans:ref>
+		</interceptor>
+	</interceptors>
+</beans:beans>

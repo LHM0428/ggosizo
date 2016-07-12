@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qna">
+	<insert id="insert">
+		insert into qna
+		values(qna_seq.nextval,#{qna_title},#{qna_content},#{qna_writer},sysdate,0,0)
+	</insert>
+
+	<select id="selectAll" resultType="qna"><!-- 검색 -->
+		select * from qna order by
+		qna_no desc
+	</select>
+
+	<select id="select" resultType="qna"><!-- 읽기 -->
+		select
+		qna_no,qna_writer,qna_title,qna_regdate,qna_content
+		from qna
+		where qna_no=#{qna_no}
+	</select>
+
+	<update id="update"><!-- 수정 -->
+		update qna set qna_title=#{qna_title},
+		qna_content=#{qna_content}, qna_regdate=sysdate
+		where qna_no=#{qna_no}
+	</update>
+
+	<delete id="delete"><!-- 삭제 -->
+		delete from qna
+		where qna_no=#{qna_no}
+	</delete>
+
+	<select id="selectPage" resultType="qna">
+		select
+		qna_no,qna_writer,qna_title,qna_regdate,qna_content,qna_viewcnt
+		from
+		qna
+		order by qna_no desc
+	</select>
+
+	<select id="countPaging" resultType="int">
+		select count(*) from qna
+	</select>
+
+	<select id="listSearch" resultType="qna">
+		select * from qna
+		where qna_no >0
+		<include refid="search" />
+		order by qna_no desc
+	</select>
+	
+	<select id="listSearchCount" resultType="int">
+		select count(*) from qna
+		where qna_no>0
+		<include refid="search" />
+	</select>
+	
+	   
+	<sql id="search">
+       <!-- if(title이 null이 아니면){  -->
+     <if test="searchType != null">
+       <choose>
+         <when test="searchType=='t'.toString()">
+           and qna_title like '%'||#{keyword}||'%'
+         </when>
+         <when test="searchType=='c'.toString()">
+           and qna_content like '%'||#{keyword}||'%'
+         </when>
+         <when test="searchType=='w'.toString()">
+           and qna_writer like '%'||#{keyword}||'%'
+         </when>
+         <when test="searchType=='tc'.toString()">
+           and (qna_title like '%'||#{keyword}||'%'
+                or qna_content like '%'||#{keyword}||'%')
+         </when>
+         <when test="searchType=='cw'.toString()">
+            and (qna_content like '%'||#{keyword}||'%'
+                or qna_writer like '%'||#{keyword}||'%')
+         </when>         
+         <when test="searchType=='tcw'.toString()">
+           and (qna_title like '%'||#{keyword}||'%'
+                or qna_content like '%'||#{keyword}||'%'
+                or qna_writer like '%'||#{keyword}||'%')
+         </when>
+       </choose>       
+     </if>
+   </sql>
+   <update id="updateViewCnt"><!-- 조회수 -->
+   update qna set qna_viewcnt = qna_viewcnt +1 where qna_no =#{qna_no}
+   </update>
+   
+     
+    <update id="updateReplyCnt">
+   	update qna set qna_replycnt = qna_replycnt + #{amount}
+   	where qna_no=#{qna_no}
+   </update> 
+   
+   <select id="selectId" resultType="qna">
+   	select * from qna where qna_writer=#{writer}
+   </select>
+</mapper>
